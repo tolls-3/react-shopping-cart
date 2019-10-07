@@ -18,13 +18,18 @@ function App() {
   };
 
   const removeItem = item => {
-    setCart([]);
+	  //debugger;
+    setCart(
+      cart.filter(book => {
+        return book.id !== item.id;
+      })
+    );
   };
 
   return (
     <div className="App">
       <ProductContext.Provider value={{ products, addItem }}>
-        <CartContext.Provider value={{cart, removeItem}}>
+        <CartContext.Provider value={{ cart, removeItem }}>
           <Navigation />
 
           {/* Routes */}
@@ -36,8 +41,8 @@ function App() {
           />
 
           <Route
-			path="/cart"
-			component={ShoppingCart}
+            path="/cart"
+            component={ShoppingCart}
             // render={() => <ShoppingCart cart={cart} removeItem={removeItem} />}
           />
         </CartContext.Provider>
